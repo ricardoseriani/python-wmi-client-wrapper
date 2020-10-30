@@ -7,7 +7,8 @@ directly to end-users.
 
 import csv
 import sh
-from StringIO import StringIO
+from io import StringIO
+
 
 class WmiClientWrapper(object):
     """
@@ -22,7 +23,7 @@ class WmiClientWrapper(object):
     def __init__(self, username="Administrator", password=None, host=None, namespace='//./root/cimv2', delimiter="\01"):
         assert username
         assert password
-        assert host # assume host is up
+        assert host  # assume host is up
 
         # store the credentials for later
         self.username = username
@@ -31,7 +32,7 @@ class WmiClientWrapper(object):
 
         self.delimiter = delimiter
         self.namespace = namespace
-        
+
     def _make_credential_args(self):
         """
         Makes credentials that get passed to wmic. This assembles a list of
@@ -53,8 +54,8 @@ class WmiClientWrapper(object):
 
         arguments.append(hostaddr)
         # the format for namespace
-        space= "--namespace={namespace}".format(namespace=self.namespace)
-        
+        space = "--namespace={namespace}".format(namespace=self.namespace)
+
         arguments.append(space)
         return arguments
 
